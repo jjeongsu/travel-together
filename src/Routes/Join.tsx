@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import ThemeBtn from "../Components/ThemeBtn";
+import ThemeToggle from "../Components/ThemeToggle";
 
 interface IForm {
   email : string,
@@ -46,6 +48,8 @@ function Join (){
         />
       <Button > JOIN </Button>
     </form>
+    <ThemeBtn />
+    <ThemeToggle />
   </>);
 }
 
