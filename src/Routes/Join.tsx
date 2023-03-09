@@ -9,14 +9,38 @@ interface IForm {
   userPw: string,
   userPwChk: string,
 }
+const FrequencyEmails = [
+  '@naveer.com',
+  '@gmail.com',
+  '@daum.net',
+  '@hanmail.net',
+  '@yahoo.com',
+  '@outlook.com',
+  '@nate.com',
+  '@kakao.com',
+]
 function Join (){
-  const {register, handleSubmit, setValue} = useForm<IForm>();
+  const {register, handleSubmit, setValue, watch, formState: {errors}} = useForm<IForm>();
+  const onValid = (data:IForm) => {
+    
+  }
+  const handleIdDuplicate = (e:React.MouseEvent<HTMLButtonElement>) => {
+    //서버에 이이디 보내서 중복확인하기
+    //서함api url 참고하기
+  }
+  //email autocomplete 만들기
+
+
+
   return (<>
-    <form>
+    <form onSubmit={handleSubmit(onValid)}>
       <Input 
         {
           ...register("email", {
-            required: "Please write email"
+            required: "Please write email",
+            validate: {
+              haveAt: (value) => value.includes("@") ? true : false 
+            }
           })
         }
         placeholder = "Write Email"
@@ -29,6 +53,7 @@ function Join (){
         }
         placeholder = "Write ID"
       />
+      <Button onClick =  {handleIdDuplicate}> 아이디 중복확인 </Button>
       <Input 
         {
           ...register("userPw", {
@@ -60,6 +85,7 @@ const Input = styled.input`
   font-size: 20px;
   `;
 const Button  =styled.button`
-  
+  width: 20%;
+  height: 40px;
 `;
 export default Join;
